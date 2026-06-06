@@ -1,0 +1,6 @@
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>{{title}}:</span>
+                            <div>
+                                {{ ${{modelNameLowerCase}}->{{column}} }}
+                            </div>
+                        </div>

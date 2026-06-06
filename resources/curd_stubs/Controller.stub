@@ -1,0 +1,118 @@
+<?php
+
+namespace {{controllerNamespace}};
+
+use {{modelNamespace}}\{{modelName}};
+use Illuminate\Http\Request;
+use App\Actions\{{modelName}}Datatable;
+use App\Http\Requests\DatatableRequest;
+/**
+ * Class {{modelName}}Controller
+ * @package App\Http\Controllers
+ */
+class {{modelName}}Controller extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $this->authorize('Access {{modelName}}s');
+        
+        if($request->has('draw')){
+            return (new {{modelName}}Datatable)->handel(app(DatatableRequest::class));
+        };
+
+        return view('{{modelView}}.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $this->authorize('Create {{modelName}}');
+        ${{modelNameLowerCase}} = new {{modelName}}();
+        return view('{{modelView}}.create', compact('{{modelNameLowerCase}}'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->authorize('Create {{modelName}}');
+        request()->validate({{modelName}}::$rules);
+
+        ${{modelNameLowerCase}} = {{modelName}}::create($request->all());
+        notify()->success(__('{{modelName}} created successfully.'));
+        return redirect()->route('{{modelRoute}}.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $this->authorize('Show {{modelName}}');
+        ${{modelNameLowerCase}} = {{modelName}}::find($id);
+
+        return view('{{modelView}}.show', compact('{{modelNameLowerCase}}'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $this->authorize('Edit {{modelName}}');
+        ${{modelNameLowerCase}} = {{modelName}}::find($id);
+
+        return view('{{modelView}}.edit', compact('{{modelNameLowerCase}}'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  {{modelName}} ${{modelNameLowerCase}}
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, {{modelName}} ${{modelNameLowerCase}})
+    {
+        $this->authorize('Edit {{modelName}}');
+
+        request()->validate({{modelName}}::$rules);
+
+        ${{modelNameLowerCase}}->update($request->all());
+        notify()->success(__('{{modelName}} updated successfully'));
+        return redirect()->route('{{modelRoute}}.index');
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $this->authorize('Delete {{modelName}}');
+        
+        ${{modelNameLowerCase}} = {{modelName}}::find($id)->delete();
+        notify()->success(__('{{modelName}} deleted successfully'));
+        return redirect()->route('{{modelRoute}}.index');
+    }
+}

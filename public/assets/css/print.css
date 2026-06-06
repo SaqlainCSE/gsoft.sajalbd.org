@@ -1,0 +1,330 @@
+@font-face {
+    font-family: 'SutonnyMJ';
+    src: url('../fonts/SutonnyMJ.woff2') format('woff2'),
+        url('../fonts/SutonnyMJ.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SutonnyMJ';
+    src: url('../fonts/SutonnyMJ-Bold.woff2') format('woff2'),
+        url('../fonts/SutonnyMJ-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SutonnyMJ';
+    src: url('../fonts/SutonnyMJ-BoldItalic.woff2') format('woff2'),
+        url('../fonts/SutonnyMJ-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SutonnyMJ';
+    src: url('../fonts/SutonnyMJ-Italic.woff2') format('woff2'),
+        url('../fonts/SutonnyMJ-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SutonnyOMJ';
+    src: url('../fonts/SutonnyOMJ.woff2') format('woff2'),
+        url('../fonts/SutonnyOMJ.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+div.page {
+    height: 297mm;
+    width: 210mm;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 1.4173228346em;
+    /* page-break-after: always; */
+    position: relative;
+}
+
+div.page[orientation=landscape] {
+    height: 210mm;
+    width: 297mm;
+}
+
+div.page[size=A0] {
+    height: 1189mm;
+    width: 841mm;
+    font-size: 2.44140625em;
+}
+
+div.page[size=A0][orientation=landscape] {
+    height: 841mm;
+    width: 1189mm;
+}
+
+div.page[size=A1] {
+    height: 841mm;
+    width: 594mm;
+    font-size: 1.953125em;
+}
+
+div.page[size=A1][orientation=landscape] {
+    height: 594mm;
+    width: 841mm;
+}
+
+div.page[size=A2] {
+    height: 594mm;
+    width: 420mm;
+    font-size: 1.5625em;
+}
+
+div.page[size=A2][orientation=landscape] {
+    height: 420mm;
+    width: 594mm;
+}
+
+div.page[size=A3] {
+    height: 420mm;
+    width: 297mm;
+    font-size: 1.25em;
+}
+
+div.page[size=A3][orientation=landscape] {
+    height: 297mm;
+    width: 420mm;
+}
+
+div.page[size=A4] {
+    height: 275mm;
+    width: 210mm;
+    font-size: 1em;
+    overflow: visible;
+}
+
+div.page[size=A4][orientation=landscape] {
+    height: 210mm;
+    width: 297mm;
+}
+
+div.page[size=A5] {
+    height: 210mm;
+    width: 148mm;
+    font-size: 0.8em;
+}
+
+div.page[size=A5][orientation=landscape] {
+    height: 148mm;
+    width: 210mm;
+}
+
+div.page[size=A6] {
+    height: 148mm;
+    width: 105mm;
+    font-size: 0.64em;
+}
+
+div.page[size=A6][orientation=landscape] {
+    height: 105mm;
+    width: 148mm;
+}
+
+div.page[size=A7] {
+    height: 105mm;
+    width: 74mm;
+    font-size: 0.512em;
+}
+
+div.page[size=A7][orientation=landscape] {
+    height: 74mm;
+    width: 105mm;
+}
+
+div.page[size=A8] {
+    height: 74mm;
+    width: 52mm;
+    font-size: 0.4096em;
+}
+
+div.page[size=A8][orientation=landscape] {
+    height: 52mm;
+    width: 74mm;
+}
+
+div.page[size=A9] {
+    height: 52mm;
+    width: 37mm;
+    font-size: 0.32768em;
+}
+
+div.page[size=A9][orientation=landscape] {
+    height: 37mm;
+    width: 52mm;
+}
+
+div.page[size=A10] {
+    height: 37mm;
+    width: 26mm;
+    font-size: 0.262144em;
+}
+
+div.page[size=A10][orientation=landscape] {
+    height: 26mm;
+    width: 37mm;
+}
+
+div.page[page][pages].count::after {
+    bottom: 0;
+    content: attr(page) "/"attr(pages);
+    left: 0;
+    padding: 1.4173228346em;
+    position: absolute;
+    right: 0;
+    top: 0;
+    vertical-align: bottom;
+}
+
+@media print {
+    div.page {
+        width: 210mm;
+    }
+
+    div.page[orientation=landscape] {
+        width: 297mm;
+    }
+
+    div.page[size=A0] {
+        width: 841mm;
+    }
+
+    div.page[size=A0][orientation=landscape] {
+        width: 1189mm;
+    }
+
+    div.page[size=A1] {
+        width: 594mm;
+    }
+
+    div.page[size=A1][orientation=landscape] {
+        width: 841mm;
+    }
+
+    div.page[size=A2] {
+        width: 420mm;
+    }
+
+    div.page[size=A2][orientation=landscape] {
+        width: 594mm;
+    }
+
+    div.page[size=A3] {
+        width: 297mm;
+    }
+
+    div.page[size=A3][orientation=landscape] {
+        width: 420mm;
+    }
+
+    div.page[size=A4] {
+        width: 210mm;
+    }
+
+    div.page[size=A4][orientation=landscape] {
+        width: 297mm;
+    }
+
+    div.page[size=A5] {
+        width: 148mm;
+    }
+
+    div.page[size=A5][orientation=landscape] {
+        width: 210mm;
+    }
+
+    div.page[size=A6] {
+        width: 105mm;
+    }
+
+    div.page[size=A6][orientation=landscape] {
+        width: 148mm;
+    }
+
+    div.page[size=A7] {
+        width: 74mm;
+    }
+
+    div.page[size=A7][orientation=landscape] {
+        width: 105mm;
+    }
+
+    div.page[size=A8] {
+        width: 52mm;
+    }
+
+    div.page[size=A8][orientation=landscape] {
+        width: 74mm;
+    }
+
+    div.page[size=A9] {
+        width: 37mm;
+    }
+
+    div.page[size=A9][orientation=landscape] {
+        width: 52mm;
+    }
+
+    div.page[size=A10] {
+        width: 26mm;
+    }
+
+    div.page[size=A10][orientation=landscape] {
+        width: 37mm;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 50px;
+        width: 194mm;
+    }
+}
+
+
+.table-fw{
+    width: 100%;
+}
+.text-end{
+    text-align: right;
+}
+.text-center{
+    text-align: center;
+}
+.table-border{
+    border-collapse: collapse !important;
+    border-spacing: 0;
+}
+.table-border td, .table-border th{
+    border: 1px solid #000;
+}
+@media screen {
+    body {
+        background: radial-gradient(#d0d0d0, #909090) fixed;
+        font-family: 'SutonnyOMJ';
+        font-size: 20px;
+    }
+
+    div.page {
+        background: white;
+        margin: 1.4173228346em auto;
+    }
+}
+
+@page {
+    margin: 1.4173228346em;
+}
