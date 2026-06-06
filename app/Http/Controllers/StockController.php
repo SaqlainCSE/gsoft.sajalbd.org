@@ -62,28 +62,35 @@ class StockController extends Controller
             1️⃣ BALANCE B/F
             ============================== */
             $productTotal = Product::query()
-                ->when($carat, fn($q)=>$q->where('carat', $carat))
-                ->where('type', $type)
-                ->when($start, fn($q)=>$q->where('created_at','<',$start))
-                ->selectRaw("ROUND(SUM($column),2) as total")
-                ->value('total') ?? 0;
+                            ->when($carat, fn($q)=>$q->where('carat', $carat))
+                            ->where('type', $type)
+                            ->when($start, fn($q)=>$q->where('created_at','<',$start))
+                            ->selectRaw("ROUND(SUM($column),2) as total")
+                            ->value('total') ?? 0;
 
-            $stockOutTotal = Stock::query()
-                ->where('trx_type','out')
-                ->when($start, fn($q)=>$q->where('created_at','<',$start))
-                ->selectRaw("ROUND(SUM($stockColumn),2) as total")
-                ->value('total') ?? 0;
+                $stockOutTotal = Stock::query()
+                                ->join('products', 'products.product_nr', '=', 'stocks.token')
+                                ->where('stocks.trx_type', 'out')
+                                ->where('products.type', $type)
+                                ->when($carat, fn($q) => $q->where('products.carat', $carat))
+                                ->when($start, fn($q) => $q->where('stocks.created_at', '<', $start))
+                                ->selectRaw("ROUND(SUM(stocks.$stockColumn), 2) as total")
+                                ->value('total') ?? 0;
 
             $bf = round($productTotal - $stockOutTotal, 2);
 
             /* ==============================
             2️⃣ SALE (DATE RANGE)
             ============================== */
+            
             $saleToday = Stock::query()
-                ->where('trx_type','out')
-                ->when($start && $end, fn($q)=>$q->whereBetween('created_at', [$start, $end]))
-                ->selectRaw("ROUND(SUM($stockColumn),2) as total")
-                ->value('total') ?? 0;
+                        ->join('products', 'products.product_nr', '=', 'stocks.token')
+                        ->where('stocks.trx_type', 'out')
+                        ->where('products.type', $type)
+                        ->when($carat, fn($q) => $q->where('products.carat', $carat))
+                        ->when($start && $end, fn($q) => $q->whereBetween('stocks.created_at', [$start, $end]))
+                        ->selectRaw("ROUND(SUM(stocks.$stockColumn), 2) as total")
+                        ->value('total') ?? 0;
 
             $balanceAfterSale = round($bf - $saleToday, 2);
 
